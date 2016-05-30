@@ -3,9 +3,9 @@ import java.util.Random;
 public class DungeonGeneration {
 
     static int[][] layout;
-    static int minRooms = 6;
-    static int maxRooms = 50;
-    static int maxSubbranches;
+    static int minRooms = 50;
+    static int maxRooms = 100;
+    static int maxSubbranches = 10;
     static int maxBranchesPerRoom = 4;
     static int maxRoomsPerBranch = 8;
 
@@ -16,7 +16,7 @@ public class DungeonGeneration {
     static Random rng;
 
     public static void main (String[] args) {
-        layout = new int[15][15];
+        layout = new int[25][25];
         for (int x = 0; x < layout.length; x++) {
             for (int y = 0; y < layout.length; y++) {
                 layout[x][y] = 0;
@@ -140,6 +140,9 @@ public class DungeonGeneration {
 
     static void validate() {
         if (totalRooms < minRooms) {
+            totalRooms = 0;
+            totalBranches = 0;
+            subbranches = 0;
             layout[(int)Math.floor(layout.length/2)][(int)Math.floor(layout[0].length/2)] = 2;
 
             int mainBranches = rng.nextInt(4)+1;
